@@ -75,7 +75,9 @@ function splitCommands(line) {
     const c = noHeredoc[i];
     if (quote) { cur += c; if (c === quote) quote = null; continue; }
     if (c === "'" || c === '"') { quote = c; cur += c; continue; }
-    if (c === ";" || c === "\n" || c === "&" || c === "|") { parts.push(cur); cur = ""; continue; }
+    // `2>&1`, `&>` et `>&` sont des redirections, pas des separateurs.
+    const redirect = c === "&" && (noHeredoc[i - 1] === ">" || noHeredoc[i + 1] === ">");
+    if (!redirect && (c === ";" || c === "\n" || c === "&" || c === "|")) { parts.push(cur); cur = ""; continue; }
     cur += c;
   }
   parts.push(cur);
