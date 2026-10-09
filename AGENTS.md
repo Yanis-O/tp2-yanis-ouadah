@@ -19,6 +19,9 @@ Les tests s'appellent `*.spec.ts` (INFRA-205) : un fichier `*.test.ts` n'est pas
 
 ## Conventions
 
+Un `AGENTS.md` de sous-dossier precise ou remplace ces conventions pour son dossier :
+il prime sur celui-ci (ex. `src/lib/` : pas de JSDoc, un `export default` par module).
+
 1. **Toute fonction exportee porte une JSDoc** d'une ligne minimum, qui dit ce qu'elle
    fait et pas comment.
 2. **Les erreurs remontent en `Result`, jamais en `throw`.** Une fonction qui peut
