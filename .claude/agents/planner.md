@@ -2,6 +2,7 @@
 name: planner
 description: Turn a goal into a written, reviewable, step-by-step implementation plan on disk. Never implements.
 model: sonnet
+tools: Read, Glob, Grep, Bash, WebFetch, Write, Edit
 color: yellow
 ---
 

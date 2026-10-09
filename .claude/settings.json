@@ -2,7 +2,9 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "agent": "architect",
   "model": "sonnet",
-  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Edit(./.env)", "Edit(./.env.*)"]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -16,7 +18,14 @@
       {
         "matcher": "Edit|Write|MultiEdit",
         "hooks": [
-          { "type": "command", "command": "bash \"${CLAUDE_PROJECT_DIR}/scripts/checks.sh\"" }
+          { "type": "command", "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/post-edit-checks.mjs\"", "timeout": 180 }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/dev-done-gate.mjs\"", "timeout": 300 }
         ]
       }
     ]

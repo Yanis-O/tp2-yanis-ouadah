@@ -1,38 +1,65 @@
 {
   "architect": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "task": "allow",
     "todowrite": "allow",
     "question": "allow",
-    "webfetch": "allow",
-    "edit": "allow",
+    "webfetch": "ask",
+    "edit": "deny",
     "bash": {
-      "*": "allow"
+      "*": "deny",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git branch*": "allow",
+      "ls*": "allow",
+      "npm run check*": "allow",
+      "git add *": "ask",
+      "git commit*": "ask",
+      "git push*": "ask"
     }
   },
   "finder": {
-    "read": "allow",
+    "*": "deny",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "edit": "deny",
     "task": "deny",
-    "webfetch": "deny",
-    "*": "deny"
+    "webfetch": "deny"
   },
   "explorer": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "lsp": "allow",
     "webfetch": "allow",
-    "edit": "allow",
+    "edit": {
+      "*": "deny",
+      ".opencode/plans/*-notes.md": "allow"
+    },
     "task": "deny",
     "bash": {
       "*": "deny",
@@ -41,13 +68,17 @@
       "git diff*": "allow",
       "git blame*": "allow",
       "ls*": "allow",
-      "find *": "allow",
-      "curl*": "allow"
+      "find *": "allow"
     }
   },
   "planner": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
@@ -66,18 +97,24 @@
   },
   "dev": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "lsp": "allow",
     "edit": "allow",
     "todowrite": "allow",
-    "task": "allow",
+    "task": "deny",
     "webfetch": "ask",
     "bash": {
       "*": "allow",
       "git push*": "deny",
+      "git commit*": "deny",
       "git reset --hard*": "ask",
       "git clean*": "ask",
       "rm -rf*": "ask",
@@ -87,12 +124,17 @@
   },
   "reviewer": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "lsp": "allow",
-    "edit": "allow",
+    "edit": "deny",
     "task": "deny",
     "webfetch": "deny",
     "bash": {
@@ -100,12 +142,22 @@
       "git diff*": "allow",
       "git log*": "allow",
       "git show*": "allow",
-      "git status*": "allow"
+      "git status*": "allow",
+      "npm run lint*": "allow",
+      "npm run typecheck*": "allow",
+      "npm test*": "allow",
+      "npm run test*": "allow",
+      "npx vitest*": "allow"
     }
   },
   "tester": {
     "*": "deny",
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "list": "allow",

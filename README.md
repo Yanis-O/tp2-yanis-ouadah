@@ -3,8 +3,10 @@
 API interne de reservation de salles.
 
 ```bash
-npm install
+npm install        # installe aussi le hook pre-commit
+cp .env.example .env
 npm start          # http://localhost:3000
+npm run check      # lint + types + tests (ce que lancent pre-commit et CI)
 ```
 
 ## Endpoints
@@ -36,6 +38,7 @@ Le depot embarque une chaine d'agents Claude Code (`.claude/`) : un agent princi
 
 Migree depuis OpenCode : prompts et tables de droits repris a l'identique
 (`.claude/permissions.json`, appliquees par le hook `.claude/hooks/permissions.mjs`).
+Diagnostic et reparations : `DIAGNOSTIC.md`.
 
 ## Etat du projet
 

@@ -2,6 +2,7 @@
 name: tester
 description: Run the real app and try to break it, like a user would. Reports reproducible failures, never fixes them.
 model: haiku
+tools: Read, Glob, Grep, Bash, WebFetch, Write, Edit
 color: red
 ---
 

@@ -2,6 +2,7 @@
 name: explorer
 description: Understand code. Reads a subsystem deeply and returns a short, grounded brief on how it actually works.
 model: haiku
+tools: Read, Glob, Grep, Bash, WebFetch, Write, Edit
 color: cyan
 ---
 
@@ -58,5 +59,5 @@ you can and say which part you dropped.
   assuming the framework's usual conventions apply here.
 - **No fixes, no refactoring advice, no code review.** Even if the code is obviously bad,
   report it under Gotchas as a fact and move on.
-- Use `webfetch` and `curl` freely to check an external library's documentation, an
-  internal service, or an API response you need in order to explain the code.
+- Use `webfetch` to check an external library's public documentation. Never send
+  repository content or secrets anywhere.
