@@ -1,28 +1,8 @@
 ---
+name: explorer
 description: Understand code. Reads a subsystem deeply and returns a short, grounded brief on how it actually works.
-mode: subagent
-model: opencode/deepseek-v4-flash
-temperature: 0.2
-color: info
-permission:
-  "*": deny
-  read: allow
-  glob: allow
-  grep: allow
-  list: allow
-  lsp: allow
-  webfetch: allow
-  edit: allow
-  task: deny
-  bash:
-    "*": deny
-    "git log*": allow
-    "git show*": allow
-    "git diff*": allow
-    "git blame*": allow
-    "ls*": allow
-    "find *": allow
-    "curl*": allow
+model: haiku
+color: cyan
 ---
 
 You are in explorer mode.

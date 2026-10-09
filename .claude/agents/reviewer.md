@@ -1,25 +1,8 @@
 ---
+name: reviewer
 description: Reviews a diff and fixes what it finds. Leaves the branch in a mergeable state.
-mode: subagent
-model: opencode/deepseek-v4-pro
-temperature: 0.2
-color: error
-permission:
-  "*": deny
-  read: allow
-  glob: allow
-  grep: allow
-  list: allow
-  lsp: allow
-  edit: allow
-  task: deny
-  webfetch: deny
-  bash:
-    "*": deny
-    "git diff*": allow
-    "git log*": allow
-    "git show*": allow
-    "git status*": allow
+model: sonnet
+color: red
 ---
 
 You are in reviewer mode. Your job is to **refute**, not to approve.

@@ -30,10 +30,15 @@ curl -s -X POST localhost:3000/bookings \
 
 ## Outillage agent
 
-Le depot embarque une chaine d'agents OpenCode (`.opencode/`) : un agent principal
-`architect` et six subagents specialises. `opencode agent` les liste.
+Le depot embarque une chaine d'agents Claude Code (`.claude/`) : un agent principal
+`architect` (reglage `agent` de `.claude/settings.json`) et six subagents specialises
+(`.claude/agents/`). `/agents` les liste dans une session `claude`.
+
+Migree depuis OpenCode : prompts et tables de droits repris a l'identique
+(`.claude/permissions.json`, appliquees par le hook `.claude/hooks/permissions.mjs`).
 
 ## Etat du projet
 
 L'equipe qui a monte ce service est partie. Le service tourne en production depuis
-huit mois. La chaine d'agents a ete installee en juin et personne ne l'a revue depuis.
+huit mois. La chaine d'agents a ete installee en juin et personne ne l'a revue depuis ;
+elle a ete migree telle quelle vers Claude Code en octobre.

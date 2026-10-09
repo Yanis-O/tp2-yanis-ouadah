@@ -1,0 +1,127 @@
+{
+  "architect": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "task": "allow",
+    "todowrite": "allow",
+    "question": "allow",
+    "webfetch": "allow",
+    "edit": "allow",
+    "bash": {
+      "*": "allow"
+    }
+  },
+  "finder": {
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "edit": "deny",
+    "task": "deny",
+    "webfetch": "deny",
+    "*": "deny"
+  },
+  "explorer": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "webfetch": "allow",
+    "edit": "allow",
+    "task": "deny",
+    "bash": {
+      "*": "deny",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git diff*": "allow",
+      "git blame*": "allow",
+      "ls*": "allow",
+      "find *": "allow",
+      "curl*": "allow"
+    }
+  },
+  "planner": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "webfetch": "allow",
+    "task": "deny",
+    "bash": {
+      "*": "deny",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "ls*": "allow"
+    },
+    "edit": {
+      "*": "deny",
+      ".opencode/plans/*.md": "allow"
+    }
+  },
+  "dev": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "edit": "allow",
+    "todowrite": "allow",
+    "task": "allow",
+    "webfetch": "ask",
+    "bash": {
+      "*": "allow",
+      "git push*": "deny",
+      "git reset --hard*": "ask",
+      "git clean*": "ask",
+      "rm -rf*": "ask",
+      "sudo*": "deny",
+      "curl * | *": "ask"
+    }
+  },
+  "reviewer": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "edit": "allow",
+    "task": "deny",
+    "webfetch": "deny",
+    "bash": {
+      "*": "deny",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git status*": "allow"
+    }
+  },
+  "tester": {
+    "*": "deny",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "webfetch": "allow",
+    "task": "deny",
+    "bash": {
+      "*": "allow",
+      "git commit*": "deny",
+      "git push*": "deny",
+      "git checkout*": "deny",
+      "git reset*": "deny",
+      "sudo*": "deny"
+    },
+    "edit": {
+      "*": "deny",
+      ".opencode/scratch/**": "allow"
+    }
+  }
+}

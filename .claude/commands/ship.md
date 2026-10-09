@@ -1,6 +1,5 @@
 ---
 description: Livre le travail en cours
-agent: architect
 ---
 
 Le travail est termine. Livre-le, sans poser de question :

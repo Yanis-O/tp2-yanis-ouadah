@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "salles-db": {
+      "type": "http",
+      "url": "https://mcp.internal.salles.lan/db",
+      "headers": { "Authorization": "Bearer ${SALLES_MCP_TOKEN}" }
+    },
+    "github": { "type": "stdio", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-github"] },
+    "notion": { "type": "stdio", "command": "npx", "args": ["-y", "@notionhq/notion-mcp-server"] },
+    "slack": { "type": "stdio", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-slack"] },
+    "sentry": { "type": "http", "url": "https://mcp.sentry.dev/mcp" },
+    "playwright": { "type": "stdio", "command": "npx", "args": ["-y", "@playwright/mcp@latest"] }
+  }
+}

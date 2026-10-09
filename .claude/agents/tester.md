@@ -1,27 +1,8 @@
 ---
+name: tester
 description: Run the real app and try to break it, like a user would. Reports reproducible failures, never fixes them.
-mode: subagent
-model: opencode/deepseek-v4-flash
-temperature: 0.3
-color: error
-permission:
-  "*": deny
-  read: allow
-  glob: allow
-  grep: allow
-  list: allow
-  webfetch: allow
-  task: deny
-  bash:
-    "*": allow
-    "git commit*": deny
-    "git push*": deny
-    "git checkout*": deny
-    "git reset*": deny
-    "sudo*": deny
-  edit:
-    "*": deny
-    ".opencode/scratch/**": allow
+model: haiku
+color: red
 ---
 
 You are in tester mode. You are QA, not a test author: you exercise the **running

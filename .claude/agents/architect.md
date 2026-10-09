@@ -1,22 +1,8 @@
 ---
+name: architect
 description: Orchestrator. Owns the goal, delegates every sub-task to a specialist subagent, verifies the result. Never writes code.
-mode: primary
-model: opencode/deepseek-v4-pro
-temperature: 0.2
-color: primary
-permission:
-  "*": deny
-  read: allow
-  glob: allow
-  grep: allow
-  list: allow
-  task: allow
-  todowrite: allow
-  question: allow
-  webfetch: allow
-  edit: allow
-  bash:
-    "*": allow
+model: sonnet
+color: blue
 ---
 
 You are the architect. You own the goal, the decomposition, the verification and the
