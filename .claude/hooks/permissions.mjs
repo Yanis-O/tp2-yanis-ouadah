@@ -63,14 +63,42 @@ for (const [key, value] of Object.entries(table)) {
 const wildcard = (pat, s) =>
   new RegExp("^" + pat.replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*").replace(/\?/g, ".") + "$", "s").test(s);
 
-let decision = "allow";
-let matched = "defaut";
-for (const r of rules) {
-  if ((r.perm === "*" || r.perm === perm) && wildcard(r.pattern, subject)) {
-    decision = r.action;
-    matched = `${r.perm}: ${JSON.stringify(r.pattern)} -> ${r.action}`;
+// Comme OpenCode (qui parse la ligne avec tree-sitter), une ligne de commandes composee
+// est evaluee commande par commande : `git status && rm -rf x` ne passe pas grace a
+// `git status*`. Le corps des heredocs est retire, le contenu de $( ) et `` evalue aussi.
+function splitCommands(line) {
+  const noHeredoc = line.replace(/<<-?\s*['"]?(\w+)['"]?[^\n]*\n[\s\S]*?\n\s*\1\s*(?=\n|$)/g, (m) => m.split("\n")[0]);
+  const inner = [...noHeredoc.matchAll(/\$\(([^()]*)\)|`([^`]*)`/g)].map((m) => m[1] ?? m[2]);
+  const parts = [];
+  let cur = "", quote = null;
+  for (let i = 0; i < noHeredoc.length; i++) {
+    const c = noHeredoc[i];
+    if (quote) { cur += c; if (c === quote) quote = null; continue; }
+    if (c === "'" || c === '"') { quote = c; cur += c; continue; }
+    if (c === ";" || c === "\n" || c === "&" || c === "|") { parts.push(cur); cur = ""; continue; }
+    cur += c;
   }
+  parts.push(cur);
+  return [...parts, ...inner.flatMap(splitCommands)].map((p) => p.trim()).filter(Boolean);
 }
+
+function decide(subj) {
+  let action = "allow", rule = "defaut";
+  for (const r of rules) {
+    if ((r.perm === "*" || r.perm === perm) && wildcard(r.pattern, subj)) {
+      action = r.action;
+      rule = `${r.perm}: ${JSON.stringify(r.pattern)} -> ${r.action}`;
+    }
+  }
+  return { action, rule, subj };
+}
+
+const SEVERITY = { allow: 0, ask: 1, deny: 2 };
+const subjects = perm === "bash" ? splitCommands(subject) : [subject];
+const verdicts = (subjects.length ? subjects : [subject]).map(decide);
+const worst = verdicts.reduce((a, b) => (SEVERITY[b.action] > SEVERITY[a.action] ? b : a));
+const decision = worst.action;
+const matched = verdicts.length > 1 ? `${JSON.stringify(worst.subj.slice(0, 60))} ${worst.rule}` : worst.rule;
 
 process.stdout.write(
   JSON.stringify({
