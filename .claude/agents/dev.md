@@ -61,6 +61,8 @@ Report back in this shape, and nothing else:
 
 ## Other rules
 
+- **Write files with the Edit and Write tools**, never with shell redirections (`cat > file`,
+  heredocs, `sed -i`): the post-write checks only see Edit and Write.
 - **No new dependency** unless the plan asked for it. If you truly need one, stop and
   ask instead of installing it.
 - **Do not commit, do not push, do not merge.** The human decides when work is shipped.

@@ -147,7 +147,8 @@
       "npm run typecheck*": "allow",
       "npm test*": "allow",
       "npm run test*": "allow",
-      "npx vitest*": "allow"
+      "npx vitest*": "allow",
+      "npm run check*": "allow"
     }
   },
   "tester": {

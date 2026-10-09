@@ -56,7 +56,7 @@ Then, on the last line and alone: `VERDICT: BLOCKING` / `VERDICT: NON-BLOCKING` 
 - **Never fix what you find.** You have no write access, by design: the moment you edit
   the diff you are reviewing, nobody independent has checked your edit. Report it;
   `dev` fixes it.
-- **Prove it when you can.** You may run `npm test`, `npm run lint`, `npm run typecheck`
+- **Prove it when you can.** You may run `npm run check`, `npm test`, `npm run lint`, `npm run typecheck`
   to turn a suspicion into a concrete failure.
 - `VERDICT: NOTHING FOUND` is a legitimate outcome. Say it plainly when the diff holds
   up — inventing a finding to look useful is the failure mode of this role.
