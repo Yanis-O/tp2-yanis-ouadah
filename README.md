@@ -3,8 +3,10 @@
 API interne de reservation de salles.
 
 ```bash
-npm install
+npm install        # installe aussi le hook pre-commit
+cp .env.example .env
 npm start          # http://localhost:3000
+npm run check      # lint + types + tests (ce que lancent pre-commit et CI)
 ```
 
 ## Endpoints
@@ -31,7 +33,8 @@ curl -s -X POST localhost:3000/bookings \
 ## Outillage agent
 
 Le depot embarque une chaine d'agents OpenCode (`.opencode/`) : un agent principal
-`architect` et six subagents specialises. `opencode agent` les liste.
+`architect` et six subagents (`finder`, `explorer`, `planner`, `dev`, `reviewer`, `tester`).
+`opencode agent list` les liste. Diagnostic et reparations de la chaine : `DIAGNOSTIC.md`.
 
 ## Etat du projet
 

@@ -24,7 +24,7 @@ describe("overlaps", () => {
     ).toBe(false);
   });
 
-  it.skip("accepte deux creneaux bout a bout", () => {
+  it("accepte deux creneaux bout a bout, dans les deux sens", () => {
     expect(
       overlaps(
         "2026-10-05T09:00:00Z",
@@ -33,14 +33,43 @@ describe("overlaps", () => {
         "2026-10-05T11:00:00Z"
       )
     ).toBe(false);
+    expect(
+      overlaps(
+        "2026-10-05T10:00:00Z",
+        "2026-10-05T11:00:00Z",
+        "2026-10-05T09:00:00Z",
+        "2026-10-05T10:00:00Z"
+      )
+    ).toBe(false);
   });
 
-  it.skip("gere un creneau inclus dans un autre", () => {
-    expect(true).toBe(true);
+  it("gere un creneau inclus dans un autre", () => {
+    const outer = ["2026-10-05T09:00:00Z", "2026-10-05T12:00:00Z"] as const;
+    const inner = ["2026-10-05T10:00:00Z", "2026-10-05T11:00:00Z"] as const;
+    expect(overlaps(...outer, ...inner)).toBe(true);
+    expect(overlaps(...inner, ...outer)).toBe(true);
   });
 
-  it.skip("gere les creneaux identiques", () => {
-    expect(true).toBe(true);
+  it("gere les creneaux identiques", () => {
+    expect(
+      overlaps(
+        "2026-10-05T09:00:00Z",
+        "2026-10-05T10:00:00Z",
+        "2026-10-05T09:00:00Z",
+        "2026-10-05T10:00:00Z"
+      )
+    ).toBe(true);
+  });
+
+  it("detecte un recouvrement d'une seule minute", () => {
+    expect(
+      overlaps(
+        "2026-10-05T09:00:00Z",
+        "2026-10-05T10:01:00Z",
+        "2026-10-05T10:00:00Z",
+        "2026-10-05T11:00:00Z"
+      )
+    ).toBe(true);
   });
 
   // SKIP ASSUME : ce test rejoue l'export de reservations de l'ancien systeme, qui vit
